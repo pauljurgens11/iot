@@ -1,1 +1,1 @@
-# Pictures for Module 1
+# Pictures for Module 2
