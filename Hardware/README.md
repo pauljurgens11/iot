@@ -2,13 +2,23 @@
 
 This is the hardware, I/we took out.
 
-## year-month-day
+## 2026-02-17
 
-- Dupont cables 20 socket to socket (watch https://youtu.be/yXirMBP3x4U for documentation)
-- 1x large breadboard, 1x medium size bredboard (watch https://youtu.be/yXirMBP3x4U for documentation)
--  ...
+- One blue bag for keeping all your IoT parts (maybe several small plastic bags for keeping smaller parts like resistors and diode)
+- One big, one medium size breadboard
+- Dupont cables - about 20 of each type (there are three types - which and why?), varying colors
+- 2-5 Leds/Unicolor (2 pins)
+- 2-5 resistors >150 Ohm (<1kOhm)
+- 3 buttons
+- 2 Wemos D1 Mini + 2 USB cables
+- USB Charger (MH-KC24-4) + 12V Power-Supply + Y-cable
 
-![A picture showing all parts taken out this day.](/images/img01.jpg "A picture showing all parts taken out this day.]")
+- dallas temperature sensor (DS1820B), the one that looks like a transistor not the long cable (same sensor, but harder to use)
+- Dht22
+- Mpr121 TOUCH sensor
+- gesture sensor
+- rfid reader (+tags)
+- rgb led + 3 resistors
 
 ## Connectivity Classification Table
 
