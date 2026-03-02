@@ -128,13 +128,62 @@ PWM
 ## Reflection 2
 [Reflection 2](/Reflections/ref02.md)
 
-## Task ...
+## Task 9
 
-...
+We learned about the different buses and experimented with them. Overall was successful. I have attached some images here and some images are in my partner's repository:
 
-If the module is longer than 1 week, you might have several reflections within it. If not, delete this and the following.
+https://github.com/NickPoint/IoT/tree/main/Module02
+
+Initially we had some trouble with the temperature sensor and touch sensor but after experimenting and googling, we got it working.
+
+RGB LED code we used is here (generated partly by ChatGPT model 5 with some changes added by ourselves):
+
+```
+#define RED D5
+#define GREEN D6
+#define BLUE D7
+
+void setColor(int r, int g, int b) {
+  analogWrite(RED, r);
+  analogWrite(GREEN, g);
+  analogWrite(BLUE, b);
+}
+
+void setup() {
+  Serial.begin(115200);
+
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(BLUE, OUTPUT);
+}
+
+void loop() {
+
+  Serial.println("Red");
+  setColor(1023,0,0);
+  delay(1500);
+
+  Serial.println("Green");
+  setColor(0,1023,0);
+  delay(1500);
+
+  Serial.println("Blue");
+  setColor(0,0,1023);
+  delay(1500);
+
+  Serial.println("Yellow");
+  setColor(1023,1023,0);
+  delay(1500);
+
+  Serial.println("Purple");
+  setColor(1023,0,1023);
+  delay(1500);
+
+  Serial.println("Cyan");
+  setColor(0,1023,1023);
+  delay(1500);
+}
+```
 
 ## Reflection 3
 [Reflection 3](/Reflections/ref03.md)
-
-

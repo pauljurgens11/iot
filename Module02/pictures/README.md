@@ -9,3 +9,13 @@
 ![LED with button](IMG_1838.jpeg)
 
 ![Relay and solenoid](IMG_1839.jpeg)
+
+![RGB LED colors](IMG_1857.jpg)
+
+![RGB LED colors](IMG_1858.jpg)
+
+![RGB LED colors](IMG_1859.jpg)
+
+![RGB LED colors](IMG_1860.jpg)
+
+![RGB LED colors](IMG_1861.jpg)

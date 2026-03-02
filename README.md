@@ -2,7 +2,7 @@
 
 Author: Paul Jürgens
 
-My partner is <replace these pointy brackets with their full name>, [portfolio link](https://github.com/partner/iot-portfolio)
+My partner is Mykyta, [portfolio link](https://github.com/NickPoint/IoT)
 
 In my team for the final project, I also had the following members:
 - <replace these pointy brackets with their full name>, [portfolio link](https://github.com/partner/iot-portfolio)
