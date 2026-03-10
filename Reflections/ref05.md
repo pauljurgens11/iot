@@ -1,0 +1,5 @@
+- had trouble with the usb tethering since we didn't have enough power i think and iphone connecting was confusing
+- left blue bag at home ;( but managed to do everything with the help of TAs
+- teaming up with another team was fun and we were very productive together
+- overall roleplay cool
+- music cool

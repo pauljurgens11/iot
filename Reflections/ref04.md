@@ -1,0 +1,4 @@
+- Cool hands on experience.
+- MQTT and HTTP difference. Interesting.
+- Mango router problems and troubleshooting was annoying.
+- Nice music.
