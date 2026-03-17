@@ -1,0 +1,5 @@
+- Flashing LED was very cool to finally get working in the end. Looked cool.
+- TA help was useful
+- talked with other students to figure out problems
+- overall very positive experience this week, not much to complain about
+- some annoying debugging
