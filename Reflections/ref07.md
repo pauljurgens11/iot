@@ -1,0 +1,5 @@
+- very cool lesson
+- discussed a lot with classmates and got help from TA
+- LED strip and OLED display excercises were cool, liked the visual output of our code
+- Like node red
+- overall fun, nothing to complain
