@@ -20,6 +20,9 @@ This is the hardware, I/we took out.
 - rfid reader (+tags)
 - rgb led + 3 resistors
 
+- 2x esp32 minikit
+- oled display
+
 ## Connectivity Classification Table
 
 TODO: here will be a table showing different connection options like serial (uart/rs232), i2c, onewire, pwm, ... 
