@@ -1,0 +1,4 @@
+- had some annoying issues with writing code to wemos, thankfully restarting pc fixed it
+- solenoid lock was a bit scary at first because of the risk of wiring it wrong, but in the end worked nicely and i liked it
+- good teamwork with other students
+- this week there was much more stuff to do and therefore had some trouble doing everything

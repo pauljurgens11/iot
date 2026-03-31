@@ -849,5 +849,275 @@ void loop(){
 }
 ```
 
+## Week 2 (actually week 3)
+
+### MQTT
+
+MQTT is quite a nice tool/protocol to use in IoT because it enables us the define and exchange various messages between devices. This enables standardised over the air communication.
+
+Actors can publish/subscribe to topics and the developer can manage the details. Very nice.
+
+For example, we can use our phone to send some data to a IoT device over WiFi using MQTT.
+
+Simulating and emulating is good for prototyping. Easy to tie stuff together with MQTT.
+
+### Task 1
+
+We implemented the integrator, ac simulator, and temperature sensor simulator in code. They can all be found [here](./src).
+
+We tried to go the simplest route to quickly reach a state which enables testing the code and communication.
+
+The temperature simulator starts sending the temperature over MQTT and slowly raises it from 18 degrees to 30 degrees and then back down to 18 degrees in a loop. The integrator listens for the temperature, and if it exceeds a certain threshold (22 degrees), it sends a "turn on" message to the AC simulator (or "turn off" depending on the direction). The AC simulator waits for updates and changes its state accordingly. Overall very simple.
+
+Also, we ran the MQTT broker on localhost to keep things simple. And used ChatGPT model 5.2 to help us generate the code.
+
+### Task 1 continued
+
+I connected the parts together initially. I used 2 separate Wemos ESPs. One detects and sends temperature, other listens and switches the solenoid lock on/off (AC). Got them working. Pictures are uploaded.
+
+Code:
+
+```
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+
+#define RELAY_PIN D1
+
+const char* ssid = "IOT11";
+const char* password = "iotempire";
+const char* mqtt_server = "192.168.1.1";
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+bool acState=false;
+
+unsigned long lastStatus=0;
+unsigned long acStartTime=0;
+
+void setupWifi()
+{
+ WiFi.begin(ssid,password);
+
+ while(WiFi.status()!=WL_CONNECTED)
+ {
+  delay(500);
+ }
+}
+
+void publishStatus()
+{
+ if(acState)
+  client.publish("hvac/ac/status","ON");
+ else
+  client.publish("hvac/ac/status","OFF");
+}
+
+void callback(char* topic, byte* payload, unsigned int length)
+{
+ String msg="";
+
+ for(int i=0;i<length;i++)
+  msg+=(char)payload[i];
+
+ if(msg=="ON")
+ {
+  digitalWrite(RELAY_PIN,HIGH);   // active LOW relay
+
+  acState=true;
+
+  acStartTime=millis();
+
+  publishStatus();
+ }
+
+ if(msg=="OFF")
+ {
+  digitalWrite(RELAY_PIN,LOW);
+
+  acState=false;
+
+  publishStatus();
+ }
+}
+
+void reconnect()
+{
+ while(!client.connected())
+ {
+  client.connect("AC_node");
+
+  client.subscribe("hvac/ac/set");
+
+  delay(500);
+ }
+}
+
+void setup()
+{
+ Serial.begin(115200);
+
+ pinMode(RELAY_PIN,OUTPUT);
+
+ digitalWrite(RELAY_PIN,LOW);
+
+ setupWifi();
+
+ client.setServer(mqtt_server,1883);
+
+ client.setCallback(callback);
+}
+
+void loop()
+{
+ if(!client.connected())
+  reconnect();
+
+ client.loop();
+
+ unsigned long now=millis();
+
+ // safety timeout 30s
+ if(acState && now-acStartTime>10000)
+ {
+  digitalWrite(RELAY_PIN,LOW);
+
+  acState=false;
+
+  publishStatus();
+ }
+
+ // publish status every 5s
+ if(now-lastStatus>5000)
+ {
+  lastStatus=now;
+
+  publishStatus();
+ }
+}
+```
+
+```
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define ONE_WIRE_BUS D2
+
+const char* ssid = "IOT11";
+const char* password = "iotempire";
+const char* mqtt_server = "192.168.1.1";
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+
+unsigned long lastMsg=0;
+
+void setup_wifi()
+{
+  WiFi.begin(ssid,password);
+
+  while(WiFi.status()!=WL_CONNECTED)
+  {
+    delay(500);
+  }
+}
+
+void reconnect()
+{
+  while(!client.connected())
+  {
+    client.connect("tempNode");
+    delay(500);
+  }
+}
+
+void setup()
+{
+  Serial.begin(115200);
+
+  sensors.begin();
+  Serial.print("Devices found: ");
+  Serial.println(sensors.getDeviceCount());
+
+  setup_wifi();
+
+  client.setServer(mqtt_server,1883);
+}
+
+void loop()
+{
+  if(!client.connected())
+  {
+    reconnect();
+  }
+
+  client.loop();
+
+  unsigned long now=millis();
+
+  if(now-lastMsg>3000)
+  {
+    lastMsg=now;
+
+    sensors.requestTemperatures();
+
+    float temp=sensors.getTempCByIndex(0);
+
+    char msg[10];
+
+    dtostrf(temp,1,2,msg);
+
+    client.publish("hvac/room1/temperature",msg);
+
+    Serial.println(msg);
+  }
+}
+```
+
+Then I went into node red and created all the required debuggers, listeners, and UI switches. Created a nice dashboard as well. All of the pictures are also available.
+
+I also built the simulators in node red. It was pretty simple. I made it very basic and used code like this:
+
+```
+var t=context.get("t")||20;
+var d=context.get("d")||1;
+
+t+=d*0.5;
+
+if(t>30)d=-1;
+if(t<18)d=1;
+
+context.set("t",t);
+context.set("d",d);
+
+msg.payload=t;
+
+return msg;
+```
+
+```
+if(msg.payload=="ON")
+{
+ msg.color="red";
+ msg.payload="AC ON";
+}
+else
+{
+ msg.color="blue";
+ msg.payload="AC OFF";
+}
+
+return msg;
+```
+
+I used MQTT elements, function elements and UI elements. Forgot to take a picture :(
+
+Overall, I had some problems but I figured them out with the help of other students.
+
 ## Reflection 6
 [Reflection 6](/Reflections/ref06.md)
