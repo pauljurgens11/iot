@@ -1,0 +1,3 @@
+- Liked the intro this week because we talked a lot and didn't do individual work. Refreshing.
+- Learned quite a lot this week.
+- was a time crunch. not many problems with iotempower tho overall. was nice
