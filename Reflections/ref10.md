@@ -1,0 +1,3 @@
+- very cool to team up and do a creative project
+- independent tinkering which i like
+- no complaints

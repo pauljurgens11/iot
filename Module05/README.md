@@ -36,3 +36,9 @@ Followed the steps in github. Could pretty easily flash the Wemos within the IoT
 ### Task 2
 
 Followed the steps in github. Introduces the second node. it has a button that can light up the LED on the other node. All this works using Node-RED. Everything went quite smoothly. Pictures are present. Also tested the toggle node.
+
+## Week 2
+
+We made a hotel room where there is a microphone that detects if there is too much noise. Then a LED strip starts flashing and a buzzer goes off to scare the guests. A person at reception can turn it off (node red). 
+
+More info: https://github.com/mattiastamm/IoT-Tamm
