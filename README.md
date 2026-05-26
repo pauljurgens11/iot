@@ -9,7 +9,7 @@ In my team for the final project, I also had the following members:
 - Karmo Saviauk
 - Johann Mattias Tamm
 
-Our team final project repository is [here](https://github.com/karmosav/iot_football)
+Our team final project repository is [here](https://github.com/Karmosav/iot_foosball)
 
 My personal profile and expectations, you can find [here](Module01/README.md#task-personal-profile).
 
